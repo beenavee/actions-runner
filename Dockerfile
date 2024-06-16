@@ -3,7 +3,7 @@ FROM --platform=$BUILDPLATFORM ghcr.io/actions/actions-runner:latest
 ENV MOCKERY_BINARY_VER=2.43.2 MUTAGEN_VERSION=0.17.6
 
 RUN sudo apt-get update && sudo apt-get install -y ansible-core wget \
-    && rm -rf /var/lib/apt/lists/* \
+    && sudo rm -rf /var/lib/apt/lists/* \
     && sudo apt-get clean \
     && sudo apt-get autoremove -y
 
