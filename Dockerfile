@@ -2,7 +2,14 @@ FROM --platform=$BUILDPLATFORM ghcr.io/actions/actions-runner:latest
 
 ENV MOCKERY_BINARY_VER=2.43.2 MUTAGEN_VERSION=0.17.6
 
-RUN sudo apt-get update && sudo apt-get install -y ansible-core wget \
+RUN sudo apt-get update && sudo apt-get install -y ansible-core wget ca-certificates curl \
+    && sudo install -m 0755 -d /etc/apt/keyrings \
+    && sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc \
+    && sudo chmod a+r /etc/apt/keyrings/docker.asc \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+        $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null \
+    && sudo apt-get update && sudo apt-get install -y docker-ce-cli \
     && sudo rm -rf /var/lib/apt/lists/* \
     && sudo apt-get clean \
     && sudo apt-get autoremove -y
