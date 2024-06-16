@@ -1,8 +1,8 @@
-FROM --platform=$BUILDPLATFORM docker.io/myoung34/github-runner:ubuntu-noble
+FROM --platform=$BUILDPLATFORM ghcr.io/actions/actions-runner:latest
 
 ENV MOCKERY_BINARY_VER=2.43.2 MUTAGEN_VERSION=0.17.6
 
-RUN apt-get update && apt-get install -y ansible-core \
+RUN apt-get update && apt-get install -y ansible-core wget \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean \
     && apt-get autoremove -y
