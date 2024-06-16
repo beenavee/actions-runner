@@ -4,8 +4,8 @@ ENV MOCKERY_BINARY_VER=2.43.2 MUTAGEN_VERSION=0.17.6
 
 RUN sudo apt-get update && sudo apt-get install -y ansible-core wget \
     && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean \
-    && apt-get autoremove -y
+    && sudo apt-get clean \
+    && sudo apt-get autoremove -y
 
 RUN cd /tmp \
     && wget https://github.com/vektra/mockery/releases/download/v${MOCKERY_BINARY_VER}/mockery_${MOCKERY_BINARY_VER}_Linux_x86_64.tar.gz \
